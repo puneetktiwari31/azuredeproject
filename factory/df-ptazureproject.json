@@ -1,0 +1,15 @@
+{
+	"name": "df-ptazureproject",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a5160990-752b-483d-b5b5-122d54efed7e",
+		"tenantId": "e407b348-55e7-46ae-bf50-17dac41db3ef"
+	}
+}
