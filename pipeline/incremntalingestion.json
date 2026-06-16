@@ -11,6 +11,12 @@
 						"dependencyConditions": [
 							"Succeeded"
 						]
+					},
+					{
+						"activity": "currenttimestamp",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
 				"policy": {
@@ -61,7 +67,12 @@
 						"referenceName": "parquet_dynamic",
 						"type": "DatasetReference",
 						"parameters": {
-							"container": "bronze"
+							"container": "bronze",
+							"folder": "user",
+							"file": {
+								"value": "concat(@{pipeline().parameters.table},'_',variables('current'))",
+								"type": "Expression"
+							}
 						}
 					}
 				]
@@ -102,6 +113,23 @@
 					},
 					"firstRowOnly": false
 				}
+			},
+			{
+				"name": "currenttimestamp",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "current",
+					"value": {
+						"value": "@utcNow()",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
@@ -113,6 +141,11 @@
 			},
 			"cdc_col": {
 				"type": "string"
+			}
+		},
+		"variables": {
+			"current": {
+				"type": "String"
 			}
 		},
 		"annotations": []
